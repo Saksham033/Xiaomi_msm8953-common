@@ -2,6 +2,11 @@
 # system.prop for msm8953-common
 #
 
+# ART
+PRODUCT_PROPERTY_OVERRIDES += \
+dalvik.vm.dex2oat-filter=speed \
+dalvik.vm.image-dex2oat-filter=speed
+
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
 af.fast_track_multiplier=2 \
@@ -122,7 +127,7 @@ vendor.vidc.enc.disable_bframes=1
 
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
-ro.sys.fw.dex2oat_thread_count=4 \
+ro.sys.fw.dex2oat_thread_count=8 \
 ro.vendor.extension_library=libqti-perfd-client.so
 
 # Netmgrd
@@ -163,6 +168,7 @@ persist.radio.videopause.mode=1 \
 persist.vendor.radio.custom_ecc=1 \
 persist.vendor.radio.rat_on=combine \
 persist.vendor.radio.sib16_support=1 \
+persist.radio.aosp_usr_pref_sel=true \
 ril.subscription.types=NV,RUIM \
 rild.libargs=-d/dev/smd0 \
 rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
@@ -186,3 +192,35 @@ persist.sys.usb.config.extra=none
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
 wifi.interface=wlan0
+
+# Higher fling velocities to smooth scrolling
+# and provide better responsiveness
+PRODUCT_PROPERTY_OVERRIDES += \
+ro.min.fling_velocity=140 \
+ro.max.fling_velocity=20000
+
+# Security patch level
+PRODUCT_PROPERTY_OVERRIDES += \
+ro.vendor.build.security_patch=2018-06-05
+
+# Trim properties
+PRODUCT_PROPERTY_OVERRIDES += \
+ro.vendor.qti.sys.fw.use_trim_settings=true \
+ro.vendor.qti.sys.fw.empty_app_percent=50 \
+ro.vendor.qti.sys.fw.trim_empty_percent=100 \
+ro.vendor.qti.sys.fw.trim_cache_percent=100 \
+ro.vendor.qti.sys.fw.trim_enable_memory=2147483648
+
+# Enable B service adj transition by default
+PRODUCT_PROPERTY_OVERRIDES += \
+ro.vendor.qti.sys.fw.bservice_enable=true \
+ro.vendor.qti.sys.fw.bservice_limit=5 \
+ro.vendor.qti.sys.fw.bservice_age=5000
+
+# Dex2oat threads for faster app installation
+# Use all 8 Cores/Threads of our CPU
+PRODUCT_PROPERTY_OVERRIDES += \
+dalvik.vm.dex2oat-threads=8 \
+dalvik.vm.image-dex2oat-threads=8 \
+debug.generate-debug-info=false
+
